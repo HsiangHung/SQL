@@ -1,6 +1,3 @@
 
-* Q1: Find the titles of all movies directed by Steven Spielberg.
-   
-    SELECT title 
-    FROM movie
-    WHERE director = 'Steven Spielberg'
+
+## This is the folder to have SQL solutions of Stanford DB5 courses.
