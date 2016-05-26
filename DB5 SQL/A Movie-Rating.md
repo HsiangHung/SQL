@@ -1,6 +1,7 @@
 
 ## A. Moving-Rating Query Exercise
 
+
 ### Q1: Find the titles of all movies directed by Steven Spielberg
 ```SQL
 SELECT title 
