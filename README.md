@@ -1,2 +1,2 @@
-# SELECT from WORLD Tutorial
-### Q1: Observe the result of running a simple SQL command.
+# SELECT within SELECT Tutorial
+### Q1: List each country name where the population is larger than that of 'Russia'.
