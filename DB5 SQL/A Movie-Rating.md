@@ -34,7 +34,7 @@ WHERE m.mID NOT IN (SELECT Rating.mID FROM Rating)
 ```SQL
 SELECT Reviewer.name 
 FROM Reviewer LEFT JOIN Rating ON (Reviewer.rID = Rating.rID)
-WHERE ratingDate is NULL
+WHERE Rating.ratingDate is NULL
 ```
 
 ### Q5: Write a query to return the ratings data in a more readable format: reviewer name, movie title, stars, and ratingDate. Also, sort the data, first by reviewer name, then by movie title, and lastly by number of stars. 
