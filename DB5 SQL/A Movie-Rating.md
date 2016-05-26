@@ -22,6 +22,12 @@ ORDER BY year ASC
 SELECT title /*, stars */
 FROM Movie LEFT JOIN Rating ON (Movie.mID = Rating.mID)
 WHERE stars is NULL
+```  
+or
+```SQL
+SELECT m.title
+FROM Movie m 
+WHERE m.mID NOT IN (SELECT Rating.mID FROM Rating)
 ```
 
 ### Q4: Some reviewers didn't provide a date with their rating. Find the names of all reviewers who have ratings with a NULL value for the date. 
