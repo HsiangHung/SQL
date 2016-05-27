@@ -115,9 +115,10 @@ HAVING MAX(population) <= 25000000)
 
 ### Q10: Some countries have populations more than three times that of any of their neighbours (in the same continent). Give the countries and continents.
 ```SQL
-SELECT continent, MAX(population )
-  FROM world x
- WHERE population < ( SELECT MAX(population)
-                 FROM world y 
-                 WHERE x.continent = y.continent AND population >0 )
+SELECT w.name, w.continent 
+from world w 
+where w.population > 3 * 
+(select max(population) 
+ from world w1 
+ where w1.continent = w.continent and w1.name != w.name limit 1)
 ```
