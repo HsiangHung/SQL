@@ -70,6 +70,13 @@ WHERE area >= ALL
  FROM world y
  WHERE x.continent = y.continent AND area >0)
 ```
+or
+```SQL
+SELECT continent, name, area
+FROM world
+WHERE area IN 
+(SELECT MAX(area) FROM world GROUP BY continent)
+```
 
 ### Q8: List each continent and the name of the country that comes first alphabetically.
 ```SQL
