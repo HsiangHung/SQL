@@ -102,6 +102,16 @@ WHERE continent IN
  WHERE x.continent=y.continent AND population >0
  ORDER BY population DESC) AND population <= 25000000)
 ```
+or (easier)
+```SQL
+SELECT name, continent, population
+FROM world
+WHERE continent IN 
+( SELECT continent 
+FROM world
+GROUP BY continent
+HAVING MAX(population) <= 25000000)
+```
 
 ### Q10: Some countries have populations more than three times that of any of their neighbours (in the same continent). Give the countries and continents.
 ```SQL
