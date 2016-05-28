@@ -69,6 +69,19 @@ WHERE Rating.stars >=
    )
 ORDER BY x.title
 ```
+or 
+```SQL
+SELECT Movie.title, Rating.stars
+FROM Movie JOIN Rating ON (Movie.mID = Rating.mID)
+WHERE Movie.mID IN
+  (SELECT r.mID
+   FROM Rating r
+   GROUP BY r.mID
+   HAVING COUNT(r.rID) >= 1)
+GROUP BY Movie.mID   
+HAVING Rating.stars = MAX(Rating.stars)
+ORDER BY Movie.title
+```
 
 ### Q8: For each movie, return the title and the 'rating spread', that is, the difference between highest and lowest ratings given to that movie. Sort by rating spread from highest to lowest, then by movie title. 
 ```SQL
