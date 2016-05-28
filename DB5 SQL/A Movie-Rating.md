@@ -47,13 +47,16 @@ ORDER BY Reviewer.name, Movie.title, Rating.stars ASC
 
 ### Q6: For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, return the reviewer's name and the title of the movie. 
 ```SQL
-SELECT DISTINCT Reviewer.name, Movie.title/*, a.mID, a.rID, a.stars */
-FROM Rating a JOIN Rating b ON (a.rID = b.rID AND a.mID=b.mID)
-            JOIN Movie ON (a.mID = Movie.mID)
-            JOIN Reviewer ON (Reviewer.rID = a.rID)
-WHERE a.stars < b.stars AND a.ratingDate < b.ratingDate
-ORDER BY a.mID, a.rID
+SELECT Reviewer.name, Movie.title/*, a.stars, a.ratingDate */
+FROM Rating a JOIN Reviewer ON (a.rID = Reviewer.rID)
+              JOIN Movie ON (a.mID = Movie.mID)
+              JOIN Rating c ON (a.mID = c.mID AND a.rID = c.rID)
+WHERE a.rID IN 
+(SELECT rID FROM Rating b  WHERE a.mID = b.mID  GROUP BY rID  HAVING COUNT(rID) >1) 
+AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
+note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
+
 
 ### Q7: For each movie that has at least one rating, find the highest number of stars that movie received. Return the movie title and number of stars. Sort by movie title. 
 ```SQL
