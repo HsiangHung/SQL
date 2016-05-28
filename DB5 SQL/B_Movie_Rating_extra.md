@@ -53,6 +53,15 @@ FROM Rating a JOIN Rating b
 WHERE a.mID = b.mID and a.rID != b.rID and c.name < d.name
 ```
 
-
-
+### Q6: For each rating that is the lowest (fewest stars) currently in the database, return the reviewer name, movie title, and number of stars. 
+```SQL
+SELECT Reviewer.name, Movie.title, Rating.stars
+FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
+            JOIN Reviewer ON (Rating.rID = Reviewer.rID)
+WHERE Rating.stars <= 
+(SELECT Rating.stars
+ FROM Rating)
+ 
+ 
+```
 
