@@ -72,3 +72,11 @@ GROUP BY Movie.mID
 ORDER BY AVG(Rating.stars) DESC, Movie.title
 ```
 
+### Q8: Find the names of all reviewers who have contributed three or more ratings. (As an extra challenge, try writing the query without HAVING or without COUNT.)
+```SQL
+SELECT Reviewer.name /* , Movie.title   */
+FROM  Rating JOIN Movie ON (Rating.mID = Movie.mID)
+             JOIN Reviewer ON (Rating.rID = Reviewer.rID)
+GROUP BY Reviewer.name
+HAVING COUNT(Movie.title) >= 3
+```
