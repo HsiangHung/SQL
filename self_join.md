@@ -1,2 +1,0 @@
-# Self join
-Q1: 
