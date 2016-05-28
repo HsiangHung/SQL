@@ -36,7 +36,14 @@ WHERE Movie.mID NOT IN
  WHERE Reviewer.name IN ('Chris Jackson'))
 ```
 
-
+### Q5: For all pairs of reviewers such that both reviewers gave a rating to the same movie, return the names of both reviewers. Eliminate duplicates, don't pair reviewers with themselves, and include each pair only once. For each pair, return the names in the pair in alphabetical order. 
+```SQL
+SELECT Reviewer.name, Movie.title, COUNT(Movie.mID)
+FROM Rating JOIN Reviewer ON (Rating.rID = Reviewer.rID)
+            JOIN Movie ON (Rating.mID = Movie.mID)
+GROUP BY Movie.mID
+HAVING COUNT(Movie.mID) >1
+```
 
 
 
