@@ -44,7 +44,14 @@ FROM Rating JOIN Reviewer ON (Rating.rID = Reviewer.rID)
 GROUP BY Movie.mID
 HAVING COUNT(Movie.mID) >1
 ```
-
+or 
+```SQL
+SELECT DISTINCT c.name, d.name
+FROM Rating a JOIN Rating b 
+              JOIN Reviewer c ON (a.rID = c.rID)
+              JOIN Reviewer d ON (b.rID = d.rID)
+WHERE a.mID = b.mID and a.rID != b.rID and c.name < d.name
+```
 
 
 
