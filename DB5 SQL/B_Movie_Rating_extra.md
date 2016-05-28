@@ -92,3 +92,17 @@ WHERE Movie.director IN
    HAVING COUNT(Movie.director) > 1 )
 ORDER BY Movie.director, Movie.title
 ```
+
+### Q10: Find the movie(s) with the highest average rating. Return the movie title(s) and average rating. (Hint: This query is more difficult to write in SQLite than other systems; you might think of it as finding the highest average rating and then choosing the movie(s) with that average rating.) 
+```SQL
+SELECT Movie.title, AVG(Rating.stars) as strs
+FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
+GROUP BY Movie.mID
+HAVING strs =    
+ ( SELECT  MAX(s.stars)
+  FROM (SELECT AVG(Rating.stars) as stars
+        FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
+        GROUP BY Rating.mID )
+        as s 
+ )   
+```
