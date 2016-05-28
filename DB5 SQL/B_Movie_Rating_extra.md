@@ -107,6 +107,21 @@ HAVING strs =
  )   
 ```
 
+### Q11: Find the movie(s) with the lowest average rating. Return the movie title(s) and average rating. (Hint: This query may be more difficult to write in SQLite than other systems; you might think of it as finding the lowest average rating and then choosing the movie(s) with that average rating.) 
+```SQL
+SELECT Movie.title, AVG(Rating.stars) as strs
+FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
+GROUP BY Movie.mID
+HAVING strs =    
+ ( SELECT  MIN(s.stars)
+  FROM (SELECT AVG(Rating.stars) as stars
+        FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
+        GROUP BY Rating.mID )
+        as s 
+ )    
+```
+
+
 ### Q12: For each director, return the director's name together with the title(s) of the movie(s) they directed that received the highest rating among all of their movies, and the value of that rating. Ignore movies whose director is NULL. 
 ```SQL
 SELECT m.director, m.title, MAX(r.stars)
