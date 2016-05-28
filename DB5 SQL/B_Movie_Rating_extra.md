@@ -61,7 +61,14 @@ FROM Rating JOIN Movie ON (Rating.mID = Movie.mID)
 WHERE Rating.stars <= 
 (SELECT Rating.stars
  FROM Rating)
- 
- 
+```
+
+### Q7: List movie titles and average ratings, from highest-rated to lowest-rated. If two or more movies have the same average rating, list them in alphabetical order. 
+```SQL
+SELECT Movie.title, AVG(Rating.stars)
+FROM Rating JOIN Movie ON (Movie.mID = Rating.mID)
+            JOIN Reviewer ON (Rating.rID = Reviewer.rID)
+GROUP BY Movie.mID
+ORDER BY AVG(Rating.stars) DESC, Movie.title
 ```
 
