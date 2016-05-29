@@ -10,3 +10,16 @@ WHERE f.ID2 in
  WHERE Highschooler.name = ('Gabriel'))
 ```
 
+### Q2: For every student who likes someone 2 or more grades younger than themselves, return that student's name and grade, and the name and grade of the student they like.
+```SQL
+SELECT h.name, h.grade
+FROM Highschooler h JOIN LIkes l ON (h.ID =l.ID1)
+WHERE h.ID IN 
+(SELECT Likes.ID2
+ FROM Likes JOIN Highschooler ON (Likes.ID1 = Highschooler.ID)
+ WHERE Highschooler.grade > 
+  (SELECT Highschooler.grade +2
+   FROM Highschooler
+   )
+)   
+```
