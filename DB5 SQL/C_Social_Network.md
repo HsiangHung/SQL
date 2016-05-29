@@ -59,3 +59,15 @@ WHERE l.ID2 NOT IN
  FROM Likes)
 ```
 
+### Q6: Find names and grades of students who only have friends in the same grade. Return the result sorted by grade, then by name within each grade.
+```SQL
+SELECT DISTINCT h1.name, h1.grade/*, h2.name, h2.grade */
+FROM Friend f JOIN Highschooler h1 ON (f.ID1 = h1.ID)
+               JOIN Highschooler h2 ON (f.ID2 = h2.ID)
+WHERE h1.ID NOT IN 
+(SELECT h1.ID
+ FROM Friend f JOIN Highschooler h1 ON (h1.ID = f.ID1)
+               JOIN Highschooler h2 ON (h2.ID = f.ID2)
+ WHERE h1.grade != h2.grade)
+ ORDER BY h1.grade
+```
