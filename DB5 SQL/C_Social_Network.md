@@ -74,10 +74,15 @@ WHERE h1.ID NOT IN
 
 ### Q7: For each student A who likes a student B where the two are not friends, find if they have a friend C in common (who can introduce them!). For all such trios, return the name and grade of A, B, and C. 
 ```SQL
-SELECT h.name
-FROM Highschooler h JOIN Likes l  ON (h.ID = l.ID1)
-WHERE l.ID2 NOT IN 
-  (SELECT Friend.ID2
-   FROM Friend
-   WHERE l.ID1 = Friend.ID1)                    
 ```
+
+### Q8: Find the difference between the number of students in the school and the number of different first names. 
+```SQL
+SELECT  total.num- COUNT(t.name)  
+FROM (SELECT COUNT(h.name) as num
+      FROM Highschooler h) as total, 
+      (SELECT h.name
+       FROM Highschooler h
+       GROUP BY h.name) as t
+```
+
