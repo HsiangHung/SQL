@@ -89,11 +89,7 @@ FROM (SELECT COUNT(h.name) as num
 ### Q9: Find the name and grade of all students who are liked by more than one other student. 
 ```SQL
 SELECT h.name, h.grade
-FROM Highschooler h JOIN Likes l ON (h.ID = l.ID2)
-GROUP BY l.ID2
-HAVING COUNT(l.ID2) IN
-(SELECT MAX(t.count)
- FROM (SELECT COUNT(l.ID2) as count
-       FROM Likes l
-       GROUP BY l.ID2 ) as t ) 
+FROM Likes JOIN Highschooler h ON (Likes.ID2 = h.ID)
+GROUP BY ID2
+HAVING COUNT(ID1) >1
 ```
