@@ -31,7 +31,7 @@ WHERE Likes.ID1 IN
    FROM Likes)
    AND h1.name < h2.name 
 ```
-or much metter answer:
+or much metter answer (using self join, and each join to students' roster):
 ```SQL
 SELECT h.name, h.grade, m.name, m.grade
 FROM Likes x JOIN Likes y ON (x.ID2 = y.ID1)
