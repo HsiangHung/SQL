@@ -51,6 +51,11 @@ WHERE h.ID NOT IN (SELECT Likes.ID1 FROM Likes)
 ### Q5: 
 For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
 ```SQL
-
+SELECT h1.name, h1.grade, h2.name, h2.grade
+FROM Likes l JOIN Highschooler h1 ON (l.ID1 = h1.ID)
+             JOIN Highschooler h2 ON (l.ID2 = h2.ID)
+WHERE l.ID2 NOT IN 
+(SELECT Likes.ID1
+ FROM Likes)
 ```
 
