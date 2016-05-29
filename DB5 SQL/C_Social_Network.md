@@ -44,8 +44,13 @@ WHERE x.ID1 = y.ID2 and h.name < m.name
 ```SQL
 SELECT h.name, h.grade
 FROM Highschooler h
-WHERE h.ID NOT IN 
-   (SELECT Likes.ID1 FROM Likes)
-   AND h.ID NOT IN
-   (SELECT Likes.ID2 FROM Likes)
+WHERE h.ID NOT IN (SELECT Likes.ID1 FROM Likes)
+   AND h.ID NOT IN (SELECT Likes.ID2 FROM Likes)
 ```
+
+### Q5: 
+For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
+```SQL
+
+```
+
