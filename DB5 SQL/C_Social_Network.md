@@ -39,3 +39,13 @@ FROM Likes x JOIN Likes y ON (x.ID2 = y.ID1)
              JOIN Highschooler m ON (y.ID1 = m.ID)
 WHERE x.ID1 = y.ID2 and h.name < m.name
 ```
+
+### Q4: Find all students who do not appear in the Likes table (as a student who likes or is liked) and return their names and grades. Sort by grade, then by name within each grade. 
+```SQL
+SELECT h.name, h.grade
+FROM Highschooler h
+WHERE h.ID NOT IN 
+   (SELECT Likes.ID1 FROM Likes)
+   AND h.ID NOT IN
+   (SELECT Likes.ID2 FROM Likes)
+```
