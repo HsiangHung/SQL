@@ -13,3 +13,14 @@ SELECT 207, Movie.mID, 5, null
 FROM Movie LEFT JOIN Rating ON (Rating.mID = Movie.mID)
 GROUP BY Movie.mID
 ```
+
+### Q3: For all movies that have an average rating of 4 stars or higher, add 25 to the release year. (Update the existing tuples; don't insert new tuples.) 
+```SQL
+UPDATE Movie
+SET year = year+25
+WHERE mID IN 
+(SELECT Movie.mID
+ FROM Movie JOIN Rating ON (Movie.mID = Rating.mID)
+ GROUP BY Rating.mID
+ HAVING AVG(Rating.stars) >= 4)
+```
