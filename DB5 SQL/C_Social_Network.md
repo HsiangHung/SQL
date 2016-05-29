@@ -31,3 +31,11 @@ WHERE Likes.ID1 IN
    FROM Likes)
    AND h1.name < h2.name 
 ```
+or much metter answer:
+```SQL
+SELECT h.name, h.grade, m.name, m.grade
+FROM Likes x JOIN Likes y ON (x.ID2 = y.ID1)
+             JOIN Highschooler h ON (x.ID1 = h.ID)
+             JOIN Highschooler m ON (y.ID1 = m.ID)
+WHERE x.ID1 = y.ID2 and h.name < m.name
+```
