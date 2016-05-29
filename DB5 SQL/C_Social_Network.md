@@ -12,14 +12,8 @@ WHERE f.ID2 in
 
 ### Q2: For every student who likes someone 2 or more grades younger than themselves, return that student's name and grade, and the name and grade of the student they like.
 ```SQL
-SELECT h.name, h.grade
-FROM Highschooler h JOIN LIkes l ON (h.ID =l.ID1)
-WHERE h.ID IN 
-(SELECT Likes.ID2
- FROM Likes JOIN Highschooler ON (Likes.ID1 = Highschooler.ID)
- WHERE Highschooler.grade > 
-  (SELECT Highschooler.grade +2
-   FROM Highschooler
-   )
-)   
+SELECT y.name, y.grade, z.name, z.grade
+FROM Likes x JOIN Highschooler y ON (x.ID1 = y.ID)
+             JOIN Highschooler z ON (x.ID2 = z.ID)
+WHERE y.grade >= z.grade+2
 ```
