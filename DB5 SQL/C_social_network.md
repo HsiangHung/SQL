@@ -94,7 +94,20 @@ WHERE h1.ID NOT IN
 
 ### Q7: For each student A who likes a student B where the two are not friends, find if they have a friend C in common (who can introduce them!). For all such trios, return the name and grade of A, B, and C. 
 ```SQL
+SELECT x.name, x.grade, y.name, y.grade, z.name, z.grade
+FROM (
+      SELECT t.ID1, t.ID2, b.ID2 as ID3
+      FROM (SELECT x.ID1, x.ID2 FROM Likes x WHERE x.ID2 NOT IN (SELECT y.ID2 FROM Friend y WHERE x.ID1 = y.ID1)) as t 
+            JOIN Friend a ON (t.ID1 = a.ID1)
+            JOIN Friend b ON (t.ID2 = b.ID1)
+      WHERE a.ID2 = b.ID2
+      ) as k 
+      JOIN Highschooler x ON (k.ID1 = x.ID)
+      JOIN Highschooler y ON (k.ID2 = y.ID)
+      JOIN HIghschooler z ON (k.ID3 = z.ID)
 ```
+Note the subquery "SELECT t.ID1, t.ID2, b.ID2 as ID3 FROM ... WHERE a.ID2=b.ID2)" gives (t.ID1, t.ID2) are Likes tuple but not in Friend. b.ID2 are common friends of t.ID1's friend and t.ID2's friend.
+
 
 ### Q8: Find the difference between the number of students in the school and the number of different first names. 
 ```SQL
