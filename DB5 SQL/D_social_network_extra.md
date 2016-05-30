@@ -8,8 +8,15 @@
 
 ### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades.
 ```SQL
-
+SELECT name, grade
+FROM Highschooler
+WHERE ID NOT IN (
+   SELECT a.ID
+   FROM Friend f JOIN Highschooler a ON (f.ID1 = a.ID)
+              JOIN Highschooler b ON (f.ID2 = b.ID)
+   WHERE a.grade = b.grade)
 ```
+Note the query "SELECT a.ID ... WHERE a.grade = b.grade" gives the Friend tuple which both ID1 and ID2 are in the same grades.
 
 
 ### Q3: What is the average number of friends per student? (Your result should be just one number.) 
