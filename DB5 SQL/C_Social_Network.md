@@ -6,8 +6,7 @@ SELECT a.ID1
 FROM Likes a 
 WHERE a.ID1 IN  
  (SELECT b.ID2
-  FROM Likes b
-  WHERE a.ID2 = b.ID1)
+  FROM Likes b)
 ```
 
 ### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
@@ -16,8 +15,7 @@ SELECT a.ID1
 FROM Likes a 
 WHERE a.ID1 NOT IN  
  (SELECT b.ID2
-  FROM Likes b
-  WHERE a.ID2 = b.ID1)
+  FROM Likes b)
 ```
 
 
