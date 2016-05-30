@@ -25,3 +25,15 @@ WHERE h.name != 'Cassandra' AND (
   FROM Highschooler h
   WHERE h.name = ('Cassandra'))))
 ```
+
+### Q5: Find the name and grade of the student(s) with the greatest number of friends. 
+```SQL
+SELECT h.name, h.grade
+FROM Highschooler h JOIN Friend f ON (h.ID = f.ID1)
+GROUP BY f.ID1
+HAVING COUNT(f.ID2) = 
+ (SELECT MAX(t.num)
+  FROM (SELECT COUNT(f.ID2) as num
+        FROM Friend f
+        GROUP BY f.ID1) as t )
+```
