@@ -2,9 +2,8 @@
 
 
 ### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades. ```SQL
-SELECT AVG(t.f)
-FROM (SELECT ID1, COUNT(ID2) as f FROM Friend  GROUP BY Friend.ID1) as t
 ```
+
 
 ### Q3: What is the average number of friends per student? (Your result should be just one number.) 
 ```SQL
