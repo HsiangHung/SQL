@@ -1,7 +1,14 @@
 # D. SQL Social Network Query Extra Exercise
 
+### Q1: For every situation where student A likes student B, but student B likes a different student C, return the names and grades of A, B, and C.
+```SQL
 
-### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades. ```SQL
+```
+
+
+### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades.
+```SQL
+
 ```
 
 
