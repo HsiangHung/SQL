@@ -1,5 +1,27 @@
 # C. SQL Social Network Query Exercise
 
+### Warmup-1: Find all students who like others who like back; A likes B and B also likes A.
+```SQL
+SELECT a.ID1
+FROM Likes a 
+WHERE a.ID1 IN  
+ (SELECT b.ID2
+  FROM Likes b
+  WHERE a.ID2 = b.ID1)
+```
+
+### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
+```SQL
+SELECT a.ID1
+FROM Likes a 
+WHERE a.ID1 NOT IN  
+ (SELECT b.ID2
+  FROM Likes b
+  WHERE a.ID2 = b.ID1)
+```
+
+
+
 ### Q1: Find the names of all students who are friends with someone named Gabriel.
 ```SQL
 SELECT h.name 
