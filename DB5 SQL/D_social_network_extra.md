@@ -1,6 +1,6 @@
 # D. SQL Social Network Query Extra Exercise
 
-### Q1: For every situation where student A likes student B, but student B likes a different student C, return the names and grades of A, B, and C.
+#### Q1: For every situation where student A likes student B, but student B likes a different student C, return the names and grades of A, B, and C.
 ```SQL
 SELECT a.name, a.grade, b.name, b.grade, c.name, c.grade
 FROM 
@@ -14,7 +14,7 @@ JOIN Highschooler c ON (t.ID3 = c.ID)
 The table "t" JOIN A->B->C and each of them join to highschooler tables.
 
 
-### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades.
+#### Q2: Find those students for whom all of their friends are in different grades from themselves. Return the students' names and grades.
 ```SQL
 SELECT name, grade
 FROM Highschooler
@@ -27,14 +27,14 @@ WHERE ID NOT IN (
 Note the query "SELECT a.ID ... WHERE a.grade = b.grade" gives the Friend tuple which both ID1 and ID2 are in the same grades.
 
 
-### Q3: What is the average number of friends per student? (Your result should be just one number.) 
+#### Q3: What is the average number of friends per student? (Your result should be just one number.) 
 ```SQL
 SELECT AVG(t.f)
 FROM (SELECT ID1, COUNT(ID2) as f FROM Friend  GROUP BY Friend.ID1) as t
 ```
 
 
-### Q4: Find the number of students who are either friends with Cassandra or are friends of friends of Cassandra. Do not count Cassandra, even though technically she is a friend of a friend. 
+#### Q4: Find the number of students who are either friends with Cassandra or are friends of friends of Cassandra. Do not count Cassandra, even though technically she is a friend of a friend. 
 ```SQL
 SELECT COUNT(*)
 FROM (SELECT DISTINCT h.ID
@@ -58,7 +58,7 @@ gives the ID (=a.ID1) who's friends are Casandra's friends. Their common friends
 
 
 
-### Q5: Find the name and grade of the student(s) with the greatest number of friends. 
+#### Q5: Find the name and grade of the student(s) with the greatest number of friends. 
 ```SQL
 SELECT h.name, h.grade
 FROM Highschooler h JOIN Friend f ON (h.ID = f.ID1)
