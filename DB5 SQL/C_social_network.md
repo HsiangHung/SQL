@@ -1,6 +1,6 @@
 # C. SQL Social Network Query Exercise
 
-##### Warmup-1: Find all students who like others who like back; A likes B and B also likes A.
+#### Warmup-1: Find all students who like others who like back; A likes B and B also likes A.
 ```SQL
 SELECT a.ID1
 FROM Likes a 
@@ -9,7 +9,7 @@ WHERE a.ID1 IN
   FROM Likes b)
 ```
 
-##### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
+#### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
 ```SQL
 SELECT a.ID1
 FROM Likes a 
@@ -20,8 +20,7 @@ WHERE a.ID1 NOT IN
 
 
 
-### Q1: 
-Find the names of all students who are friends with someone named Gabriel.
+#### Q1: Find the names of all students who are friends with someone named Gabriel.
 ```SQL
 SELECT h.name 
 FROM Highschooler h JOIN Friend f ON (h.ID = f.ID1)
@@ -31,8 +30,7 @@ WHERE f.ID2 in
  WHERE Highschooler.name = ('Gabriel'))
 ```
 
-### Q2: 
-For every student who likes someone 2 or more grades younger than themselves, return that student's name and grade, and the name and grade of the student they like.
+#### Q2: For every student who likes someone 2 or more grades younger than themselves, return that student's name and grade, and the name and grade of the student they like.
 ```SQL
 SELECT y.name, y.grade, z.name, z.grade
 FROM Likes x JOIN Highschooler y ON (x.ID1 = y.ID)
@@ -40,8 +38,7 @@ FROM Likes x JOIN Highschooler y ON (x.ID1 = y.ID)
 WHERE y.grade >= z.grade+2
 ```
 
-### Q3: 
-For every pair of students who both like each other, return the name and grade of both students. Include each pair only once, with the two names in alphabetical order.
+#### Q3: For every pair of students who both like each other, return the name and grade of both students. Include each pair only once, with the two names in alphabetical order.
 ```SQL
 SELECT h1.name, h1.grade, h2.name, h2.grade
 FROM Likes JOIN Highschooler h1 ON (Likes.ID1 = h1.ID)
@@ -63,8 +60,7 @@ FROM Likes x JOIN Likes y ON (x.ID2 = y.ID1)
 WHERE x.ID1 = y.ID2 and h.name < m.name
 ```
 
-### Q4: 
-Find all students who do not appear in the Likes table (as a student who likes or is liked) and return their names and grades. Sort by grade, then by name within each grade. 
+#### Q4: Find all students who do not appear in the Likes table (as a student who likes or is liked) and return their names and grades. Sort by grade, then by name within each grade. 
 ```SQL
 SELECT h.name, h.grade
 FROM Highschooler h
@@ -72,8 +68,7 @@ WHERE h.ID NOT IN (SELECT Likes.ID1 FROM Likes)
    AND h.ID NOT IN (SELECT Likes.ID2 FROM Likes)
 ```
 
-### Q5: 
-For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
+#### Q5: For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
 ```SQL
 SELECT h1.name, h1.grade, h2.name, h2.grade
 FROM Likes l JOIN Highschooler h1 ON (l.ID1 = h1.ID)
@@ -83,8 +78,7 @@ WHERE l.ID2 NOT IN
  FROM Likes)
 ```
 
-### Q6: 
-Find names and grades of students who only have friends in the same grade. Return the result sorted by grade, then by name within each grade.
+#### Q6: Find names and grades of students who only have friends in the same grade. Return the result sorted by grade, then by name within each grade.
 ```SQL
 SELECT DISTINCT h1.name, h1.grade/*, h2.name, h2.grade */
 FROM Friend f JOIN Highschooler h1 ON (f.ID1 = h1.ID)
@@ -97,8 +91,7 @@ WHERE h1.ID NOT IN
  ORDER BY h1.grade
 ```
 
-### Q7: 
-For each student A who likes a student B where the two are not friends, find if they have a friend C in common (who can introduce them!). For all such trios, return the name and grade of A, B, and C. 
+#### Q7: For each student A who likes a student B where the two are not friends, find if they have a friend C in common (who can introduce them!). For all such trios, return the name and grade of A, B, and C. 
 ```SQL
 SELECT x.name, x.grade, y.name, y.grade, z.name, z.grade
 FROM (
@@ -115,8 +108,7 @@ FROM (
 Note the subquery "SELECT t.ID1, t.ID2, b.ID2 as ID3 FROM ... WHERE a.ID2=b.ID2)" gives (t.ID1, t.ID2) are Likes tuple but not in Friend. b.ID2 are common friends of t.ID1's friend and t.ID2's friend.
 
 
-### Q8: 
-Find the difference between the number of students in the school and the number of different first names. 
+#### Q8: Find the difference between the number of students in the school and the number of different first names. 
 ```SQL
 SELECT  total.num- COUNT(t.name)  
 FROM (SELECT COUNT(h.name) as num
@@ -126,8 +118,7 @@ FROM (SELECT COUNT(h.name) as num
        GROUP BY h.name) as t
 ```
 
-### Q9: 
-Find the name and grade of all students who are liked by more than one other student. 
+#### Q9: Find the name and grade of all students who are liked by more than one other student. 
 ```SQL
 SELECT h.name, h.grade
 FROM Likes JOIN Highschooler h ON (Likes.ID2 = h.ID)
