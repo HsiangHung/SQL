@@ -1,7 +1,6 @@
 # C. SQL Social Network Query Exercise
 
-#### Warmup-1: 
-Find all students who like others who like back; A likes B and B also likes A.
+#### Warmup-1: Find all students who like others who like back; A likes B and B also likes A.
 ```SQL
 SELECT a.ID1
 FROM Likes a 
@@ -10,8 +9,7 @@ WHERE a.ID1 IN
   FROM Likes b)
 ```
 
-### Warmup-2: 
-Find all students who like others but they don't like back; A likes B but no B likes A.
+#### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
 ```SQL
 SELECT a.ID1
 FROM Likes a 
