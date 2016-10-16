@@ -70,6 +70,16 @@ WHERE Rating.stars <=
 (SELECT Rating.stars
  FROM Rating)
 ```
+or 
+```SQL
+select name, title, stars
+from Rating join Movie on (Rating.mID = Movie.mID)
+            join Reviewer on (Rating.rID = Reviewer.rID)
+where stars = 
+(select MIN(stars)
+ from Rating)
+```
+
 
 #### Q7: List movie titles and average ratings, from highest-rated to lowest-rated. If two or more movies have the same average rating, list them in alphabetical order. 
 ```SQL
