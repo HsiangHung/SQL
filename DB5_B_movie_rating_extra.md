@@ -70,7 +70,7 @@ WHERE Rating.stars <=
 (SELECT Rating.stars
  FROM Rating)
 ```
-or 
+or  (directly using aggregation operation 'MIN(.)')
 ```SQL
 select name, title, stars
 from Rating join Movie on (Rating.mID = Movie.mID)
