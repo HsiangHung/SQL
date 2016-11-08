@@ -22,3 +22,11 @@ from game join goal on (game.id = goal.matchid)
                   join eteam on (goal.teamid = eteam.id)
 where gtime <= 10
 ```
+
+
+#### Q7: List the player for every goal scored in a game where the stadium was 'National Stadium, Warsaw'.
+```SQL
+SELECT player
+FROM goal JOIN game ON (id=matchid)
+WHERE stadium = 'National Stadium, Warsaw'
+```
