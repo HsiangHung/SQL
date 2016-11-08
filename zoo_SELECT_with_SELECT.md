@@ -66,6 +66,7 @@ select name
 from world
 where gdp > (select max(gdp) from world where continent = 'Europe')
 ```
+The second solution implicitly rules out countries in Europe, since using '>'.
 
 #### Q7: Find the largest country (by area) in each continent, show the continent, the name and the area:
 ```SQL
