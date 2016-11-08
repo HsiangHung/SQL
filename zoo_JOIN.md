@@ -7,3 +7,10 @@ select player, teamid, stadium, mdate
 from game join goal on (game.id = goal.matchid)
 where teamid = 'GER'
 ```
+
+#### Q4: Show the team1, team2 and player for every goal scored by a player called Mario.
+```SQL
+select team1, team2, player
+from game join goal on (game.id = goal.matchid)
+where player like 'Mario%'
+```
