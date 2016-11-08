@@ -60,6 +60,12 @@ WHERE continent != 'Europe' AND gdp >= ALL
 FROM world 
 WHERE gdp >0 AND continent = 'Europe')
 ```
+or
+```SQL
+select name
+from world
+where gdp > (select max(gdp) from world where continent = 'Europe')
+```
 
 #### Q7: Find the largest country (by area) in each continent, show the continent, the name and the area:
 ```SQL
