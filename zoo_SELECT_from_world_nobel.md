@@ -1,4 +1,4 @@
-# SELECT from world Tutorial
+# 1. SELECT from world Tutorial
 
 #### Q11: Show the name - but substitute Australasia for Oceania - for countries beginning with N.
 ```SQL
@@ -20,7 +20,7 @@ WHERE name LIKE 'A%' OR name LIKE 'B%'
 ```
 
 
-# SELECT from nobel Tutorial
+# 2. SELECT from nobel Tutorial
 
 #### Q8: Show the Physics winners for 1980 together with the Chemistry winners for 1984.
 ```SQL
@@ -28,4 +28,11 @@ SELECT *
 FROM nobel
 WHERE subject = 'Physics' AND yr = 1980
          OR subject = 'Chemistry' AND yr = 1984
+```
+
+#### Q9: Show the winners for 1980 excluding the Chemistry and Medicine.
+```SQL
+select * 
+from nobel
+where yr = 1980 and subject not in ('Chemistry', 'Medicine')
 ```
