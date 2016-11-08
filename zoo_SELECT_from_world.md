@@ -18,3 +18,14 @@ SELECT name,
  FROM world
 WHERE name LIKE 'A%' OR name LIKE 'B%'
 ```
+
+
+# SELECT from nobel Tutorial
+
+#### Q8: Show the Physics winners for 1980 together with the Chemistry winners for 1984.
+```SQL
+SELECT *
+FROM nobel
+WHERE subject = 'Physics' AND yr = 1980
+         OR subject = 'Chemistry' AND yr = 1984
+```
