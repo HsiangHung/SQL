@@ -73,9 +73,9 @@ The second solution implicitly rules out countries in Europe, since using '>'.
 SELECT continent, name, area
 FROM world x
 WHERE area >= ALL
-(SELECT area 
+(SELECT y.area 
  FROM world y
- WHERE x.continent = y.continent AND area >0)
+ WHERE x.continent = y.continent AND y.area >0)
 ```
 or
 ```SQL
