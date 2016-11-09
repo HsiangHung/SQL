@@ -55,8 +55,17 @@ GROUP BY stadium
 
 #### Q11: For every match involving 'POL', show the matchid, date and the number of goals scored.
 ```SQL
-SELECT matchid,mdate, COUNT(matchid)
-FROM game JOIN goal ON matchid = id 
-WHERE (team1 = 'POL' OR team2 = 'POL')
-GROUP BY matchid
+select t.matchid, t.mdate, count(t.matchid)
+from (select matchid, mdate
+from game join goal on (game.id = goal.matchid)
+where team1 = 'POL' or team2 = 'POL') as t
+group by t.matchid
+```
+
+#### Q12: For every match where 'GER' scored, show matchid, match date and the number of goals scored by 'GER'.
+```SQL
+SELECT matchid, mdate, COUNT(matchid)
+FROM game JOIN goal ON (id=matchid)
+WHERE teamid = 'GER'
+GROUP BY matchid 
 ```
