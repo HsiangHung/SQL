@@ -48,7 +48,7 @@ GROUP BY teamname
 
 #### Q10: Show the stadium and the number of goals scored in each stadium.
 ```SQL
-SELECT stadium, COUNT(stadium)
+SELECT stadium, COUNT(matchid)
 FROM game JOIN goal ON (id=matchid)
 GROUP BY stadium
 ```
