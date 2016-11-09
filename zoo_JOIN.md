@@ -30,3 +30,11 @@ SELECT player
 FROM goal JOIN game ON (id=matchid)
 WHERE stadium = 'National Stadium, Warsaw'
 ```
+
+
+#### Q8: Instead show the name of all players who scored a goal against Germany.
+```SQL
+SELECT  DISTINCT player
+FROM game JOIN goal ON (id = matchid)
+WHERE (teamid != 'GER' AND (team1 = 'GER' OR team2 = 'GER'))
+```
