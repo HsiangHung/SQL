@@ -45,3 +45,10 @@ SELECT teamname, COUNT(teamid)
 FROM eteam JOIN goal ON (id=teamid)
 GROUP BY teamname
 ```
+
+#### Q10: Show the stadium and the number of goals scored in each stadium.
+```SQL
+SELECT stadium, COUNT(stadium)
+FROM game JOIN goal ON (id=matchid)
+GROUP BY stadium
+```
