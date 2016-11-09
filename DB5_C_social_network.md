@@ -29,6 +29,14 @@ WHERE f.ID2 in
  FROM Friend JOIN Highschooler ON (Friend.ID2 = Highschooler.ID)
  WHERE Highschooler.name = ('Gabriel'))
 ```
+alternative solution:
+```SQL
+select h.name
+from Friend f join Highschooler h on (f.ID1 = h.ID)
+where (f.ID1 in (select ID from Highschooler where name = 'Gabriel')
+   or f.ID2 in (select ID from Highschooler where name = 'Gabriel'))
+  and h.name != 'Gabriel'
+```
 
 #### Q2: For every student who likes someone 2 or more grades younger than themselves, return that student's name and grade, and the name and grade of the student they like.
 ```SQL
