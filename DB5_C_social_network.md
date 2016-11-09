@@ -11,11 +11,12 @@ where l1.ID1 = l2.ID2
 
 #### Warmup-2: Find all students who like others but they don't like back; A likes B but no B likes A.
 ```SQL
-SELECT a.ID1
-FROM Likes a 
-WHERE a.ID1 NOT IN  
- (SELECT b.ID2
-  FROM Likes b)
+select ID1
+from Likes
+where ID1 not in (
+select l1.ID1
+from Likes l1 join Likes l2 on (l1.ID2 = l2.ID1)
+where l1.ID1 = l2.ID2)
 ```
 
 
