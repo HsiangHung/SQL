@@ -60,6 +60,13 @@ note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the 
 
 #### Q7: For each movie that has at least one rating, find the highest number of stars that movie received. Return the movie title and number of stars. Sort by movie title. 
 ```SQL
+select title, MAX(stars)
+from Movie join Rating on (Movie.mID = Rating.mID)
+group by title
+order by title
+```
+and more complicated query:
+```SQL
 SELECT DISTINCT x.title, Rating.stars
 FROM Movie x JOIN Rating ON (x.mID = Rating.mID)
 WHERE Rating.stars >=
