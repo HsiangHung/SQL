@@ -60,6 +60,15 @@ from Rating x join Reviewer a on (x.rID = a.rID)
      Rating y join Reviewer b on (y.rID = b.rID) 
 where x.mID = y.mID and a.name < b.name
 ```
+or 
+```SQL
+select distinct a1.name, a2.name
+from Rating r1 join Rating r2 on (r1.mID = r2.mID)
+               join Reviewer a1 on (r1.rID = a1.rID)
+               join Reviewer a2 on (r2.rID = a2.rID)
+where r1.rID != r2.rID and a1.name < a2.name
+order by a1.name
+```
 
 #### Q6: For each rating that is the lowest (fewest stars) currently in the database, return the reviewer name, movie title, and number of stars. 
 ```SQL
