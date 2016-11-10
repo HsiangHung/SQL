@@ -57,6 +57,25 @@ AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
 note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
 
+(More recently) an alternative solution is first to search which reviewer rated more than one movies.
+First do
+```SQL
+select a.rID, count(a.mID)
+from Rating a join Rating b on (a.rID = b.rID)
+group by a.rID
+```
+which will gives 201: 4, 202:1, 203: 9... it operates as self join so double counting. Then next
+```SQL
+select a.rID, count(a.mID)
+from Rating a join Rating b on (a.rID = b.rID)
+where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
+group by a.rID
+```
+gives 201:1. This removes double counting since `a.rating < b.ratingDate` and second ratings better than first rating gives `a.stars < b.stars`.
+
+
+
+
 
 #### Q7: For each movie that has at least one rating, find the highest number of stars that movie received. Return the movie title and number of stars. Sort by movie title. 
 ```SQL
