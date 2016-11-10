@@ -57,7 +57,7 @@ AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
 note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
 
-(More recently) an alternative solution is first to search which reviewer rated more than one movies.
+**(More recently) an alternative thought** is first to search which reviewer rated more than one movies.
 First do
 ```SQL
 select a.rID, count(a.mID)
