@@ -76,6 +76,13 @@ FROM Highschooler h
 WHERE h.ID NOT IN (SELECT Likes.ID1 FROM Likes)
    AND h.ID NOT IN (SELECT Likes.ID2 FROM Likes)
 ```
+alternative answer (use `union` to combine the ID1 and ID2 of the Likes table and then rule out):
+```Python
+select Highschooler.name, grade
+From Highschooler left join 
+(select ID1 as ID from Likes  union  select ID2 as ID from Likes) as joint on (Highschooler.ID = joint.ID)
+where joint.ID is NULL
+```
 
 #### Q5: For every situation where student A likes student B, but we have no information about whom B likes (that is, B does not appear as an ID1 in the Likes table), return A and B's names and grades. 
 ```SQL
