@@ -77,7 +77,7 @@ WHERE h.ID NOT IN (SELECT Likes.ID1 FROM Likes)
    AND h.ID NOT IN (SELECT Likes.ID2 FROM Likes)
 ```
 alternative answer (use `union` to combine the ID1 and ID2 of the Likes table and then rule out):
-```Python
+```SQL
 select Highschooler.name, grade
 From Highschooler left join 
 (select ID1 as ID from Likes  union  select ID2 as ID from Likes) as joint on (Highschooler.ID = joint.ID)
