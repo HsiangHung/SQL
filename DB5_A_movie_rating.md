@@ -66,26 +66,23 @@ group by a.rID
 ```
 which will gives 201: 4, 202:1, 203: 9... it operates as self join so double counting. Then next
 ```SQL
-select a.rID, count(a.mID)
+select a.rID, a.mID
 from Rating a join Rating b on (a.rID = b.rID)
 where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
 group by a.rID
 ```
-gives 201:1. This removes double counting since `a.rating < b.ratingDate` and second ratings better than first rating gives `a.stars < b.stars`. So this query gives a list of reviews who rated the same movie twice and second rating is better than the first.
+gives 201:1. This removes double counting since `a.rating < b.ratingDate` and second ratings better than first rating gives `a.stars < b.stars`. So this query gives a list of reviewers' ID who rated the same movie twice and second rating is better than the first and the movies' ID.
 Then
 ```SQL
-select Reviewer.name, Movie.title
-from Rating join Movie on (Movie.mID = Rating.mID)
-            join Reviewer on (Reviewer.rID = Rating.rID)
-where Rating.rID in (
-select a.rID
-from Rating a join Rating b on (a.rID = b.rID)
-where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
-group by a.rID)
-group by Rating.mID
-having count(Rating.mID) >1
+select name, title
+from (select a.rID as rID, a.mID as mID
+      from Rating a join Rating b on (a.rID = b.rID)
+      where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
+      group by a.rID) as t
+join Movie on (t.mID = Movie.mID)
+join Reviewer on (t.rID = Reviewer.rID)
 ```
-First we select reviewers (`Rating.rID`) from the subquery `select a.rID ... group by a.rID` and then group by `mID`.
+Then we just join the new filtered table with Movie and Reviewer, that's it.
 
 
 
