@@ -8,10 +8,12 @@ VALUES (209, 'Roger Ebert')
 
 #### Q2: Insert 5-star ratings by James Cameron for all movies in the database. Leave the review date as NULL. 
 ```SQL
-INSERT INTO Rating (rID, mID, stars, ratingDate)  
-SELECT 207, Movie.mID, 5, null
-FROM Movie LEFT JOIN Rating ON (Rating.mID = Movie.mID)
-GROUP BY Movie.mID
+INSERT INTO Rating (rID, mID, stars, ratingDate)
+select b.rID, a.mID, 5, null
+From (select Movie.mID 
+      from Movie left join Rating on (Movie.mID = Rating.mID) 
+      group by Movie.mID) as a
+join  (select Reviewer.rID from Reviewer where name = 'James Cameron') as b
 ```
 
 #### Q3: For all movies that have an average rating of 4 stars or higher, add 25 to the release year. (Update the existing tuples; don't insert new tuples.) 
