@@ -19,7 +19,7 @@ from Likes l1 join Likes l2 on (l1.ID2 = l2.ID1)
 where l1.ID1 = l2.ID2)
 ```
 
-#### Warmup-3: Find all students who like others but they are not friends; A likes B but B is not A's friend.
+#### Warmup-3: Find all students who like others but they are not friends; A likes B but B is not A's friend. List both A and B.
 ```SQL
 select l.ID1, l.ID2
 from Likes l
