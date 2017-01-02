@@ -19,6 +19,12 @@ from Likes l1 join Likes l2 on (l1.ID2 = l2.ID1)
 where l1.ID1 = l2.ID2)
 ```
 
+#### Warmup-3: Find all students who like others but they are not friends; A likes B but B is not A's friend.
+```SQL
+select l.ID1, l.ID2
+from Likes l
+where l.ID2 not in (select f.ID2 from Friend f where l.ID1=f.ID1)
+```
 
 
 #### Q1: Find the names of all students who are friends with someone named Gabriel.
