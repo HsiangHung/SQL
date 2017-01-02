@@ -26,6 +26,12 @@ from Likes l
 where l.ID2 not in (select f.ID2 from Friend f where l.ID1=f.ID1)
 ```
 
+#### Warmup-4: B is friend of A, and C is friend of B, but A and C are not friends. List A, B, C. In this case, B can introduce C to A.
+```SQL
+select f1.ID1, f1.ID2, f2.ID2
+from Friend f1 join Friend f2 on (f1.ID2 = f2.ID1)
+where f1.ID1 != f2.ID2 and f2.ID2 not in (select f3.ID2 from Friend f3 where f3.ID1 = f1.ID1)
+```
 
 #### Q1: Find the names of all students who are friends with someone named Gabriel.
 ```SQL
