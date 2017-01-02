@@ -1,6 +1,6 @@
 # C. SQL Social Network Query Exercise
 
-### Note: the friendship in `Friend` is bidirectionl, but `Likes` is one-directional.
+### Note: the friendship in `Friend` is bidirectional, but `Likes` is one-directional.
 
 #### Warmup-1: Find all students who like others who like back; A likes B and B also likes A.
 ```SQL
