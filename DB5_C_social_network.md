@@ -135,13 +135,14 @@ FROM (
 ```
 Note the subquery "SELECT t.ID1, t.ID2, b.ID2 as ID3 FROM ... WHERE a.ID2=b.ID2)" gives (t.ID1, t.ID2) are Likes tuple but not in Friend. b.ID2 are common friends of t.ID1's friend and t.ID2's friend.
 
-This problem has alternative easier way to do. Let's do first `For each student A who likes a student B where the two are not friends`. This is the query from warmup-3:
+This problem has alternative easier way to do. We can decompose it into three steps.
+(1) Let's do first `For each student A who likes a student B where the two are not friends`. This is the query from warmup-3:
 ```SQL
 select l.ID1, l.ID2
 from Likes
 where l.ID2 not in (select f.ID2 from Friend f where l.ID1=f.ID1)
 ```
-Then `For each student A who likes a student B where the two are not friends, find if they have a friend C in common `:
+(2) Then `For each student A who likes a student B where the two are not friends, find if they have a friend C in common `:
 ```SQL
 select l.ID1, l.ID2, f2.ID2
 from Likes l join Friend f1 on (l.ID1 = f1.ID1)
@@ -150,7 +151,7 @@ where l.ID2 not in (select f.ID2 from Friend f where l.ID1=f.ID1)
 and f1.ID2 = f2.ID2
 ```
 where third is the common friend C.
-Then join three `Highschooler` to get the names and grades:
+(3) Then join three `Highschooler` to get the names and grades:
 ```SQL
 select h1.name, h1.grade, h2.name, h2.grade, h3.name, h3.grade
 from Likes l join Friend f1 on (l.ID1 = f1.ID1)
