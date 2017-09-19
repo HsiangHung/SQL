@@ -108,15 +108,13 @@ WHERE l.ID2 NOT IN
 
 #### Q6: Find names and grades of students who only have friends in the same grade. Return the result sorted by grade, then by name within each grade.
 ```SQL
-SELECT DISTINCT h1.name, h1.grade/*, h2.name, h2.grade */
-FROM Friend f JOIN Highschooler h1 ON (f.ID1 = h1.ID)
-               JOIN Highschooler h2 ON (f.ID2 = h2.ID)
-WHERE h1.ID NOT IN 
-(SELECT h1.ID
- FROM Friend f JOIN Highschooler h1 ON (h1.ID = f.ID1)
-               JOIN Highschooler h2 ON (h2.ID = f.ID2)
- WHERE h1.grade != h2.grade)
- ORDER BY h1.grade
+select name, grade
+from Highschooler 
+where ID not in (select distinct h1.ID
+                 from Friend join Highschooler h1 on (Friend.ID1=h1.ID)
+                 join Highschooler h2 on (Friend.ID2=h2.ID)
+                where h1.grade != h2.grade)
+order by grade, name
 ```
 
 #### Q7: For each student A who likes a student B where the two are not friends, find if they have a friend C in common (who can introduce them!). For all such trios, return the name and grade of A, B, and C. 
