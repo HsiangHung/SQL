@@ -56,6 +56,20 @@ WHERE b.ID2 = (SELECT ID FROM Highschooler WHERE name ='Cassandra') AND b.ID2 !=
 ```
 gives the ID (=a.ID1) who's friends are Casandra's friends. Their common friends are a.ID2=b.ID1. "b.ID2 != a.ID1" removes Cassandra's friend is Cassandra.
 
+###Alternative:
+```SQL
+select count(ID)
+from (select distinct F2.ID2 as ID
+      from Friend F1 join Friend F2 on (F1.ID2=F2.ID1)
+                    join Highschooler on (F1.ID1=Highschooler.ID)
+      where name = 'Cassandra' and F2.ID2 != (select ID from Highschooler where name =  'Cassandra' )
+      union
+      select distinct F1.ID2 as ID
+      from Friend F1 join Highschooler on (F1.ID1=Highschooler.ID)
+       where name = 'Cassandra' and F1.ID2 != (select ID from Highschooler where name =  'Cassandra' )
+     )
+```
+
 
 
 #### Q5: Find the name and grade of the student(s) with the greatest number of friends. 
