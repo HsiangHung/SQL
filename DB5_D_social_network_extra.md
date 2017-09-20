@@ -56,7 +56,7 @@ WHERE b.ID2 = (SELECT ID FROM Highschooler WHERE name ='Cassandra') AND b.ID2 !=
 ```
 gives the ID (=a.ID1) who's friends are Casandra's friends. Their common friends are a.ID2=b.ID1. "b.ID2 != a.ID1" removes Cassandra's friend is Cassandra.
 
-###Alternative:
+#### Alternative (using UNION, better):
 ```SQL
 select count(ID)
 from (select distinct F2.ID2 as ID
