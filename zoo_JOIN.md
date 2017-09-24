@@ -38,6 +38,12 @@ SELECT  DISTINCT player
 FROM game JOIN goal ON (id = matchid)
 WHERE (teamid != 'GER' AND (team1 = 'GER' OR team2 = 'GER'))
 ```
+or self-join goal tables:
+```SQL
+select distinct b.player
+from goal a join goal b on (a.matchid=b.matchid)
+where a.teamid = 'GER' and b.teamid != 'GER' 
+```
 
 #### Q9: Show teamname and the total number of goals scored.
 ```SQL
