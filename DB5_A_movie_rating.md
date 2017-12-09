@@ -57,8 +57,9 @@ AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
 note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
 
-**(More recently) an alternative and much easiler query** 
-Since at most each reviewer review the same movie twice, uust do 
+**(More recently) an alternative and much easiler query**
+
+Since each reviewer review the same movie at most twice, just simply do 
 ```SQL
 select name, title
 from rating x join rating y on (x.rID=y.rID)
@@ -66,12 +67,21 @@ from rating x join rating y on (x.rID=y.rID)
               join Reviewer on (x.rID=reviewer.rID)
 where x.mID=y.mID and x.ratingDate < y.ratingDate and x.stars < y.stars
 ```
-if the problem is limited to only `TWICE`, then we still need to prepare `(rID, mID)` table 
+if the problem is limited to only review the same mpive`TWICE` but there are multiple tiimes, then we still need to prepare `(rID, mID)` table 
 ```SQL
 select rID, mID
 from rating
 group by rID, mID
 having count(*) = 2
+```
+and then
+```SQL
+select name, title
+from rating x join rating y on (x.rID=y.rID)
+              join (select rID, mID from rating group by rID, mID having count(*) =2) as z on (x.rID=z.rID)
+              join movie on (x.mID = movie.mID)
+              join Reviewer on (x.rID=reviewer.rID)
+where x.mID=y.mID and x.mID=z.mID and x.ratingDate < y.ratingDate and x.stars < y.stars
 ```
 
 
