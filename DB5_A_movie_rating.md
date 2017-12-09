@@ -67,14 +67,14 @@ from rating x join rating y on (x.rID=y.rID)
               join Reviewer on (x.rID=reviewer.rID)
 where x.mID=y.mID and x.ratingDate < y.ratingDate and x.stars < y.stars
 ```
-if the problem is limited to only review the same mpive`TWICE` but there are multiple tiimes, then we still need to prepare `(rID, mID)` table 
+if the problem is limited to only review the same moive`TWICE`, but there are 3 times or others, then we still need to prepare `(rID, mID)` table 
 ```SQL
 select rID, mID
 from rating
 group by rID, mID
 having count(*) = 2
 ```
-and then
+and then join it to filter `(rID, mID)`
 ```SQL
 select name, title
 from rating x join rating y on (x.rID=y.rID)
