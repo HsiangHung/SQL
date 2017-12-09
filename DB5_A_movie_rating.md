@@ -57,34 +57,15 @@ AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
 note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
 
-**(More recently) an alternative thought** is first to search which reviewer rated more than one movies.
-First do
-```SQL
-select a.rID, count(a.mID)
-from Rating a join Rating b on (a.rID = b.rID)
-group by a.rID
-```
-which will gives 201: 4, 202:1, 203: 9... it operates as self join so double counting. Then next
-```SQL
-select a.rID, a.mID
-from Rating a join Rating b on (a.rID = b.rID)
-where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
-group by a.rID
-```
-gives 201:1. This removes double counting since `a.rating < b.ratingDate` and second ratings better than first rating gives `a.stars < b.stars`. So this query gives a list of reviewers' ID who rated the same movie twice and second rating is better than the first and the movies' ID.
-Then
+**(More recently) an alternative and much easiler query** 
+Just do 
 ```SQL
 select name, title
-from (select a.rID as rID, a.mID as mID
-      from Rating a join Rating b on (a.rID = b.rID)
-      where a.mID = b.mID and a.ratingDate < b.ratingDate and a.stars < b.stars
-      group by a.rID) as t
-join Movie on (t.mID = Movie.mID)
-join Reviewer on (t.rID = Reviewer.rID)
+from rating x join rating y on (x.rID=y.rID)
+              join movie on (x.mID = movie.mID)
+              join Reviewer on (x.rID=reviewer.rID)
+where x.mID=y.mID and x.ratingDate < y.ratingDate and x.stars < y.stars
 ```
-Then we just join the new filtered table with Movie and Reviewer, that's it.
-
-
 
 
 #### Q7: For each movie that has at least one rating, find the highest number of stars that movie received. Return the movie title and number of stars. Sort by movie title. 
