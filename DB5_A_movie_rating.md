@@ -55,6 +55,16 @@ WHERE a.rID IN
 (SELECT rID FROM Rating b  WHERE a.mID = b.mID  GROUP BY rID  HAVING COUNT(rID) >1) 
 AND a.ratingDate < c.ratingDate AND  a.stars < c.stars
 ```
+or 
+```SQL
+select name, title
+from (select mID, rID from rating group by mID, rID having count(rID) > 1) as t 
+                           join rating r1 on (t.mID=r1.mID and r1.rID=t.rID)
+                           join rating r2 on (t.mID=r2.mID and r2.rID=t.rID)
+                           join reviewer on (t.rID= reviewer.rID)
+                           join movie on (t.mID=movie.mID)
+where r2.ratingDate > r1.ratingDate and r2.stars > r1.stars
+```
 note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the outcome is gives movives which are rated by the same reviewer twice.
 
 **(More recently) an alternative and much easiler query**
