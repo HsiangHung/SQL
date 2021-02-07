@@ -72,10 +72,10 @@ note,  if without "AND a.ratingDate < c.ratingDate AND  a.stars < c.stars", the 
 Since each reviewer review the same movie at most twice, just simply do 
 ```SQL
 select name, title
-from rating x join rating y on (x.rID=y.rID)
+from rating x join rating y on (x.rID=y.rID and x.mID=y.mID and x.ratingDate < y.ratingDate)
               join movie on (x.mID = movie.mID)
               join Reviewer on (x.rID=reviewer.rID)
-where x.mID=y.mID and x.ratingDate < y.ratingDate and x.stars < y.stars
+where x.stars < y.stars
 ```
 if the problem is limited to only review the same moive`TWICE`, but there are 3 times or others, then we still need to prepare `(rID, mID)` table 
 ```SQL
