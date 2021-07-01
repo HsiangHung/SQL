@@ -171,12 +171,8 @@ and f1.ID2 = f2.ID2
 
 #### Q8: Find the difference between the number of students in the school and the number of different first names. 
 ```SQL
-SELECT  total.num- COUNT(t.name)  
-FROM (SELECT COUNT(h.name) as num
-      FROM Highschooler h) as total, 
-      (SELECT h.name
-       FROM Highschooler h
-       GROUP BY h.name) as t
+select count(*)-count(distinct name)
+from highschooler
 ```
 
 #### Q9: Find the name and grade of all students who are liked by more than one other student. 
