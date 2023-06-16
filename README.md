@@ -35,6 +35,21 @@ FROM
         ON d.department_id = e.department_id;
 ```
 
+### [LAG()](https://www.sqltutorial.org/sql-window-functions/sql-lag/)
+
+For each employee_id, move all slaray record one row down. So the result shows first value is always NULL.
+
+```SQL
+SELECT 
+	employee_id, 
+	fiscal_year, 
+	salary,
+	LAG(salary) OVER (
+		PARTITION BY employee_id 
+		ORDER BY fiscal_year) previous_salary
+FROM
+	basic_pays;
+```
 
 ## Ranking window functions
 
