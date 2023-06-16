@@ -7,6 +7,7 @@ NOTE, the follwoing window functions are not available in MySQL, though they are
 
 ## Ranking window functions
 
+### [Rank()](https://www.sqltutorial.org/sql-window-functions/sql-rank/)
 ```SQL
 SELECT
 	col,
@@ -16,3 +17,12 @@ SELECT
 FROM
 	t;
 ```
+| col | myrank |
+| --- | --- | 
+| A | 1 |
+| B | 2 |
+| B | 2 |
+| C | 4 |
+| D | 5 |
+| D | 5 |
+| E | 7 |
