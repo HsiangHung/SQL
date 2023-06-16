@@ -5,7 +5,7 @@
 
 NOTE, the follwoing window functions are not available in MySQL, though they are available in PostgreSQL, Hive, among others.
 
-### [FIRST_VALUE()](https://www.sqltutorial.org/sql-window-functions/sql-first_value/)
+### [FIRST_VALUE()](https://www.sqltutorial.org/sql-window-functions/sql-first_value/), [LAST_VALUE()](https://www.sqltutorial.org/sql-window-functions/sql-last_value/)
 First example:
 ```SQL
 SELECT
