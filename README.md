@@ -88,3 +88,18 @@ FROM
 | D | 5 |
 | D | 5 |
 | E | 7 |
+
+### [PERCENT_RANK()](https://www.sqltutorial.org/sql-window-functions/sql-percent_rank/)
+```SQL
+SELECT
+    first_name,
+    last_name,
+    salary,
+    ROUND(
+        PERCENT_RANK() OVER (
+            ORDER BY salary
+        ) 
+    ,2) percentile_rank
+FROM
+    employees; 
+```
