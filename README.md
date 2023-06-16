@@ -51,6 +51,22 @@ FROM
 	basic_pays;
 ```
 
+### [LEAD()](https://www.sqltutorial.org/sql-window-functions/sql-lead/)
+
+Move everything in hire_date one row ahead, so the last row shows NULL.
+
+```SQL
+SELECT 
+	first_name,
+	last_name, 
+	hire_date, 
+	LEAD(hire_date, 1) OVER (
+		ORDER BY hire_date
+	) AS next_hired
+FROM 
+	employees;
+```
+
 ## Ranking window functions
 
 ### [Rank()](https://www.sqltutorial.org/sql-window-functions/sql-rank/)
