@@ -4,6 +4,7 @@
 # Window Function 
 
 NOTE, the follwoing window functions are not available in MySQL, though they are available in PostgreSQL, Hive, among others.
+Reference: [SQL Window Functions](https://www.sqltutorial.org/sql-window-functions/)
 
 ### [FIRST_VALUE()](https://www.sqltutorial.org/sql-window-functions/sql-first_value/), [LAST_VALUE()](https://www.sqltutorial.org/sql-window-functions/sql-last_value/)
 First example:
